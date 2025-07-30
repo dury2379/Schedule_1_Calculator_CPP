@@ -9,7 +9,7 @@
 
 #include "Conditions/Contains.h"
 #include "Products/Products.h"
-#include "Ingredients/Ingredients.h"
+#include "Ingredients/Ingredients_Lib.h"
 
 
 void clean_tasks(std::vector<std::vector<Product*>>*);

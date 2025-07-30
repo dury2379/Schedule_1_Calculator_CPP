@@ -5,82 +5,154 @@
 #ifndef EFFECTS_H
 #define EFFECTS_H
 
+#include <algorithm>
+#include <cstdint>
 #include <map>
 #include <string>
 
 namespace Effects
 {
-	static const std::string Anti_Gravity = "Anti-Gravity";
-	static const std::string Athletic = "Athletic";
-	static const std::string Balding = "Balding";
-	static const std::string Bright_Eyed = "Bright-Eyed";
-	static const std::string Calming = "Calming";
-	static const std::string Calorie_Dense = "Calorie-Dense";
-	static const std::string Cyclopean = "Cyclopean";
-	static const std::string Disorienting = "Disorienting";
-	static const std::string Electrifying = "Electrifying";
-	static const std::string Energizing = "Energizing";
-	static const std::string Euphoric = "Euphoric";
-	static const std::string Explosive = "Explosive";
-	static const std::string Focused = "Focused";
-	static const std::string Foggy = "Foggy";
-	static const std::string Gingeritis = "Gingeritis";
-	static const std::string Glowing = "Glowing";
-	static const std::string Jennerising = "Jennerising";
-	static const std::string Laxative = "Laxative";
-	static const std::string Long_Faced = "Long-Faced";
-	static const std::string Munchies = "Munchies";
-	static const std::string Paranoia = "Paranoia";
-	static const std::string Refreshing = "Refreshing";
-	static const std::string Schizophrenia = "Schizophrenia";
-	static const std::string Sedating = "Sedating";
-	static const std::string Seizure_Inducing = "Seizure-Inducing";
-	static const std::string Shrinking = "Shrinking";
-	static const std::string Slippery = "Slippery";
-	static const std::string Smelly = "Smelly";
-	static const std::string Sneaky = "Sneaky";
-	static const std::string Spicy = "Spicy";
-	static const std::string Thought_Provoking = "Thought-Provoking";
-	static const std::string Toxic = "Toxic";
-	static const std::string Tropic_Thunder = "Tropic-Thunder";
-	static const std::string Zombifying = "Zombifying";
-
-	static const std::map<std::string, double> PRICE_MULTIPLIER = {
-		{Shrinking, 0.60},
-		{Zombifying, 0.58},
-		{Cyclopean, 0.56},
-		{Anti_Gravity, 0.54},
-		{Long_Faced, 0.52},
-		{Electrifying, 0.50},
-		{Glowing, 0.48},
-		{Tropic_Thunder, 0.46},
-		{Thought_Provoking, 0.44},
-		{Jennerising, 0.42},
-		{Bright_Eyed, 0.40},
-		{Spicy, 0.38},
-		{Foggy, 0.36},
-		{Slippery, 0.34},
-		{Athletic, 0.32},
-		{Balding, 0.30},
-		{Calorie_Dense, 0.28},
-		{Sedating, 0.26},
-		{Sneaky, 0.24},
-		{Energizing, 0.22},
-		{Gingeritis, 0.20},
-		{Euphoric, 0.18},
-		{Focused, 0.16},
-		{Refreshing, 0.14},
-		{Munchies, 0.12},
-		{Calming, 0.10},
-		{Disorienting, 0.00},
-		{Explosive, 0.00},
-		{Laxative, 0.00},
-		{Paranoia, 0.00},
-		{Schizophrenia, 0.00},
-		{Seizure_Inducing, 0.00},
-		{Smelly, 0.00},
-		{Toxic, 0.00}
+	enum class effect_enum
+	{
+		ANTI_GRAVITY = 1,
+		ATHLETIC,
+		BALDING,
+		BRIGHT_EYED,
+		CALMING,
+		CALORIE_DENSE,
+		CYCLOPEAN,
+		DISORIENTING,
+		ELECTRIFYING,
+		ENERGIZING,
+		EUPHORIC,
+		EXPLOSIVE,
+		FOCUSED,
+		FOGGY,
+		GINGERITIS,
+		GLOWING,
+		JENNERISING,
+		LAXATIVE,
+		LONG_FACED,
+		MUNCHIES,
+		PARANOIA,
+		REFRESHING,
+		SCHIZOPHRENIA,
+		SEDATING,
+		SEIZURE_INDUCING,
+		SHRINKING,
+		SLIPPERY,
+		SMELLY,
+		SNEAKY,
+		SPICY,
+		THOUGHT_PROVOKING,
+		TOXIC,
+		TROPIC_THUNDER,
+		ZOMBIFYING
 	};
+
+	inline std::map<effect_enum, std::string> effects_to_string = {
+		{effect_enum::ANTI_GRAVITY, "Anti-Gravity"},
+		{effect_enum::ATHLETIC, "Athletic"},
+		{effect_enum::BALDING, "Balding"},
+		{effect_enum::BRIGHT_EYED, "Bright-Eyed"},
+		{effect_enum::CALMING, "Calming"},
+		{effect_enum::CALORIE_DENSE, "Calorie-Dense"},
+		{effect_enum::CYCLOPEAN, "Cyclopean"},
+		{effect_enum::DISORIENTING, "Disorienting"},
+		{effect_enum::ELECTRIFYING, "Electrifying"},
+		{effect_enum::ENERGIZING, "Energizing"},
+		{effect_enum::EUPHORIC, "Euphoric"},
+		{effect_enum::EXPLOSIVE, "Explosive"},
+		{effect_enum::FOCUSED, "Focused"},
+		{effect_enum::FOGGY, "Foggy"},
+		{effect_enum::GINGERITIS, "Gingeritis"},
+		{effect_enum::GLOWING, "Glowing"},
+		{effect_enum::JENNERISING, "Jennerising"},
+		{effect_enum::LAXATIVE, "Laxative"},
+		{effect_enum::LONG_FACED, "Long-Faced"},
+		{effect_enum::MUNCHIES, "Munchies"},
+		{effect_enum::PARANOIA, "Paranoia"},
+		{effect_enum::REFRESHING, "Refreshing"},
+		{effect_enum::SCHIZOPHRENIA, "Schizophrenia"},
+		{effect_enum::SHRINKING, "Shrinking"},
+		{effect_enum::SLIPPERY, "Slippery"},
+		{effect_enum::SMELLY, "Smelly"},
+		{effect_enum::SNEAKY, "Sneaky"},
+		{effect_enum::SPICY, "Spicy"},
+		{effect_enum::THOUGHT_PROVOKING, "Thought-Provoking"},
+		{effect_enum::TOXIC, "Toxic"},
+		{effect_enum::TROPIC_THUNDER, "Tropic-Thunder"},
+		{effect_enum::ZOMBIFYING, "Zombifying"}};
+
+	static const std::map<effect_enum, double> PRICE_MULTIPLIER = {
+		{effect_enum::SHRINKING, 0.60},
+		{effect_enum::ZOMBIFYING, 0.58},
+		{effect_enum::CYCLOPEAN, 0.56},
+		{effect_enum::ANTI_GRAVITY, 0.54},
+		{effect_enum::LONG_FACED, 0.52},
+		{effect_enum::ELECTRIFYING, 0.50},
+		{effect_enum::GLOWING, 0.48},
+		{effect_enum::TROPIC_THUNDER, 0.46},
+		{effect_enum::THOUGHT_PROVOKING, 0.44},
+		{effect_enum::JENNERISING, 0.42},
+		{effect_enum::BRIGHT_EYED, 0.40},
+		{effect_enum::SPICY, 0.38},
+		{effect_enum::FOGGY, 0.36},
+		{effect_enum::SLIPPERY, 0.34},
+		{effect_enum::ATHLETIC, 0.32},
+		{effect_enum::BALDING, 0.30},
+		{effect_enum::CALORIE_DENSE, 0.28},
+		{effect_enum::SEDATING, 0.26},
+		{effect_enum::SNEAKY, 0.24},
+		{effect_enum::ENERGIZING, 0.22},
+		{effect_enum::GINGERITIS, 0.20},
+		{effect_enum::EUPHORIC, 0.18},
+		{effect_enum::FOCUSED, 0.16},
+		{effect_enum::REFRESHING, 0.14},
+		{effect_enum::MUNCHIES, 0.12},
+		{effect_enum::CALMING, 0.10},
+		{effect_enum::DISORIENTING, 0.00},
+		{effect_enum::EXPLOSIVE, 0.00},
+		{effect_enum::LAXATIVE, 0.00},
+		{effect_enum::PARANOIA, 0.00},
+		{effect_enum::SCHIZOPHRENIA, 0.00},
+		{effect_enum::SEIZURE_INDUCING, 0.00},
+		{effect_enum::SMELLY, 0.00},
+		{effect_enum::TOXIC, 0.00}
+	};
+
+	std::vector<effect_enum> to_effects_vector(std::uint64_t effects_long)
+	{
+		std::vector<effect_enum> result = {};
+		std::uint8_t effect_enum_val = 0;
+
+		do
+		{
+			effect_enum_val = effects_long % 100;
+			effects_long /= 100;
+			if (effect_enum_val != 0)
+			{
+				result.push_back(static_cast<effect_enum>(effect_enum_val));
+			}
+		} while (effect_enum_val != 0);
+		std::sort(result.begin(), result.end());
+
+		return result;
+	}
+
+	std::uint64_t to_effects_int64(std::vector<effect_enum>& effects_vector)
+	{
+		std::uint64_t result = 0;
+		std::sort(effects_vector.begin(), effects_vector.end());
+
+		for (effect_enum& effect: effects_vector)
+		{
+			result *= 100;
+			result += static_cast<int8_t>(effect);
+		}
+
+		return result;
+	}
 };
 
 #endif // EFFECTS_H
