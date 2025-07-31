@@ -5,24 +5,12 @@ set(CMAKE_CXX_STANDARD 20)
 
 file(GLOB INGREDIENTS
         "Ingredients/Ingredients_Lib.h"
-        "Effects.h")
+        "Effects_Lib.h")
 
 file(GLOB PRODUCTS
-        "Products/Products.h"
+        "Products/Products_Lib.h"
         "Products/Product.cpp"
-        "Products/Product.h"
-        "Products/Cocaine.cpp"
-        "Products/Cocaine.h"
-        "Products/Granddaddy_Purple.cpp"
-        "Products/Granddaddy_Purple.h"
-        "Products/Green_Crack.cpp"
-        "Products/Green_Crack.h"
-        "Products/Methamphetamine.cpp"
-        "Products/Methamphetamine.h"
-        "Products/OG_Kush.cpp"
-        "Products/OG_Kush.h"
-        "Products/Sour_Diesel.cpp"
-        "Products/Sour_Diesel.h")
+        "Products/Product.h")
 
 file(GLOB CONDITIONS
         "Conditions/Condition.cpp"

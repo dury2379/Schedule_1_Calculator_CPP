@@ -6,8 +6,8 @@
 #define INGREDIENTS_H
 
 #include <cstdint>
-
-#include "Effects.h"
+#include <map>
+#include "../Effects_Lib.h"
 
 namespace Ingredients_Lib
 {
@@ -31,23 +31,23 @@ namespace Ingredients_Lib
 		VIAGRA
 	};
 
-	static const std::map<ingredient_type, Effects::effect_enum> ingredient_base_effect = {
-		{ingredient_type::ADDY, Effects::effect_enum::THOUGHT_PROVOKING},
-		{ingredient_type::BANANA, Effects::effect_enum::GINGERITIS},
-		{ingredient_type::BATTERY, Effects::effect_enum::BRIGHT_EYED},
-		{ingredient_type::CHILI, Effects::effect_enum::SPICY},
-		{ingredient_type::CUKE, Effects::effect_enum::ENERGIZING},
-		{ingredient_type::DONUT, Effects::effect_enum::CALORIE_DENSE},
-		{ingredient_type::ENERGY_DRINK, Effects::effect_enum::ATHLETIC},
-		{ingredient_type::FLU_MEDICINE, Effects::effect_enum::SEDATING},
-		{ingredient_type::GASOLINE, Effects::effect_enum::TOXIC},
-		{ingredient_type::HORSE_SEMEN, Effects::effect_enum::LONG_FACED},
-		{ingredient_type::IODINE, Effects::effect_enum::JENNERISING},
-		{ingredient_type::MEGA_BEAN, Effects::effect_enum::FOGGY},
-		{ingredient_type::MOTOR_OIL, Effects::effect_enum::SLIPPERY},
-		{ingredient_type::MOUTH_WASH, Effects::effect_enum::BALDING},
-		{ingredient_type::PARACETAMOL, Effects::effect_enum::SNEAKY},
-		{ingredient_type::VIAGRA, Effects::effect_enum::TROPIC_THUNDER}
+	static const std::map<ingredient_type, Effects_Lib::effect_enum> ingredient_base_effect = {
+		{ingredient_type::ADDY, Effects_Lib::effect_enum::THOUGHT_PROVOKING},
+		{ingredient_type::BANANA, Effects_Lib::effect_enum::GINGERITIS},
+		{ingredient_type::BATTERY, Effects_Lib::effect_enum::BRIGHT_EYED},
+		{ingredient_type::CHILI, Effects_Lib::effect_enum::SPICY},
+		{ingredient_type::CUKE, Effects_Lib::effect_enum::ENERGIZING},
+		{ingredient_type::DONUT, Effects_Lib::effect_enum::CALORIE_DENSE},
+		{ingredient_type::ENERGY_DRINK, Effects_Lib::effect_enum::ATHLETIC},
+		{ingredient_type::FLU_MEDICINE, Effects_Lib::effect_enum::SEDATING},
+		{ingredient_type::GASOLINE, Effects_Lib::effect_enum::TOXIC},
+		{ingredient_type::HORSE_SEMEN, Effects_Lib::effect_enum::LONG_FACED},
+		{ingredient_type::IODINE, Effects_Lib::effect_enum::JENNERISING},
+		{ingredient_type::MEGA_BEAN, Effects_Lib::effect_enum::FOGGY},
+		{ingredient_type::MOTOR_OIL, Effects_Lib::effect_enum::SLIPPERY},
+		{ingredient_type::MOUTH_WASH, Effects_Lib::effect_enum::BALDING},
+		{ingredient_type::PARACETAMOL, Effects_Lib::effect_enum::SNEAKY},
+		{ingredient_type::VIAGRA, Effects_Lib::effect_enum::TROPIC_THUNDER}
 	};
 
 	static const std::map<ingredient_type, int> ingredients_costs = {
@@ -68,196 +68,215 @@ namespace Ingredients_Lib
 		{ingredient_type::PARACETAMOL, 3},
 		{ingredient_type::VIAGRA, 4}
 	};
+
+	static const std::map<ingredient_type, std::string> ingredient_to_string = {
+		{ingredient_type::ADDY, "Addy"},
+		{ingredient_type::BANANA, "Banana"},
+		{ingredient_type::BATTERY, "Battery"},
+		{ingredient_type::CHILI, "Chili"},
+		{ingredient_type::CUKE, "Cuke"},
+		{ingredient_type::DONUT, "Donut"},
+		{ingredient_type::ENERGY_DRINK, "Energy Drink"},
+		{ingredient_type::FLU_MEDICINE, "Flu Medicine"},
+		{ingredient_type::GASOLINE, "Gasoline"},
+		{ingredient_type::HORSE_SEMEN, "Horse Semen"},
+		{ingredient_type::IODINE, "Iodine"},
+		{ingredient_type::MEGA_BEAN, "Mega Bean"},
+		{ingredient_type::MOTOR_OIL, "Motor Oil"},
+		{ingredient_type::MOUTH_WASH, "Mouth Wash"},
+		{ingredient_type::PARACETAMOL, "Paracetamol"},
+		{ingredient_type::VIAGRA, "Viagra"}
+	}
 	/*
 
 
-				{Effects::effect_enum::, {Effects::effect_enum::, Effects::effect_enum::}},
+				{Effects_Lib::effect_enum::, {Effects_Lib::effect_enum::, Effects_Lib::effect_enum::}},
 	*/
-	static const std::map<ingredient_type, std::map<Effects::effect_enum, std::pair<Effects::effect_enum, Effects::effect_enum>>> transforms_map = {
+	static const std::map<ingredient_type, std::map<Effects_Lib::effect_enum, std::pair<Effects_Lib::effect_enum, Effects_Lib::effect_enum>>> transforms_map = {
 		{
 			ingredient_type::ADDY, {
-				{Effects::effect_enum::EXPLOSIVE, {Effects::effect_enum::EXPLOSIVE, Effects::effect_enum::EUPHORIC}},
-				{Effects::effect_enum::FOGGY, {Effects::effect_enum::FOGGY, Effects::effect_enum::ENERGIZING}},
-				{Effects::effect_enum::GLOWING, {Effects::effect_enum::GLOWING, Effects::effect_enum::REFRESHING}},
-				{Effects::effect_enum::LONG_FACED, {Effects::effect_enum::LONG_FACED, Effects::effect_enum::ELECTRIFYING}},
-				{Effects::effect_enum::SEDATING, {Effects::effect_enum::SEDATING, Effects::effect_enum::GINGERITIS}}
+				{Effects_Lib::effect_enum::EXPLOSIVE, {Effects_Lib::effect_enum::EXPLOSIVE, Effects_Lib::effect_enum::EUPHORIC}},
+				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::ENERGIZING}},
+				{Effects_Lib::effect_enum::GLOWING, {Effects_Lib::effect_enum::GLOWING, Effects_Lib::effect_enum::REFRESHING}},
+				{Effects_Lib::effect_enum::LONG_FACED, {Effects_Lib::effect_enum::LONG_FACED, Effects_Lib::effect_enum::ELECTRIFYING}},
+				{Effects_Lib::effect_enum::SEDATING, {Effects_Lib::effect_enum::SEDATING, Effects_Lib::effect_enum::GINGERITIS}}
 			},
 		},
 		{
 			ingredient_type::BANANA, {
-				{Effects::effect_enum::CALMING, {Effects::effect_enum::CALMING, Effects::effect_enum::SNEAKY}},
-				{Effects::effect_enum::CYCLOPEAN, {Effects::effect_enum::CYCLOPEAN, Effects::effect_enum::ENERGIZING}},
-				{Effects::effect_enum::DISORIENTING, {Effects::effect_enum::DISORIENTING, Effects::effect_enum::FOCUSED}},
-				{Effects::effect_enum::ENERGIZING, {Effects::effect_enum::ENERGIZING, Effects::effect_enum::THOUGHT_PROVOKING}},
-				{Effects::effect_enum::FOCUSED, {Effects::effect_enum::FOCUSED, Effects::effect_enum::SEIZURE_INDUCING}},
-				{Effects::effect_enum::LONG_FACED, {Effects::effect_enum::LONG_FACED, Effects::effect_enum::REFRESHING}},
-				{Effects::effect_enum::PARANOIA, {Effects::effect_enum::PARANOIA, Effects::effect_enum::JENNERISING}},
-				{Effects::effect_enum::SMELLY, {Effects::effect_enum::SMELLY, Effects::effect_enum::ANTI_GRAVITY}},
-				{Effects::effect_enum::TOXIC, {Effects::effect_enum::TOXIC, Effects::effect_enum::SMELLY}}
+				{Effects_Lib::effect_enum::CALMING, {Effects_Lib::effect_enum::CALMING, Effects_Lib::effect_enum::SNEAKY}},
+				{Effects_Lib::effect_enum::CYCLOPEAN, {Effects_Lib::effect_enum::CYCLOPEAN, Effects_Lib::effect_enum::ENERGIZING}},
+				{Effects_Lib::effect_enum::DISORIENTING, {Effects_Lib::effect_enum::DISORIENTING, Effects_Lib::effect_enum::FOCUSED}},
+				{Effects_Lib::effect_enum::ENERGIZING, {Effects_Lib::effect_enum::ENERGIZING, Effects_Lib::effect_enum::THOUGHT_PROVOKING}},
+				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::SEIZURE_INDUCING}},
+				{Effects_Lib::effect_enum::LONG_FACED, {Effects_Lib::effect_enum::LONG_FACED, Effects_Lib::effect_enum::REFRESHING}},
+				{Effects_Lib::effect_enum::PARANOIA, {Effects_Lib::effect_enum::PARANOIA, Effects_Lib::effect_enum::JENNERISING}},
+				{Effects_Lib::effect_enum::SMELLY, {Effects_Lib::effect_enum::SMELLY, Effects_Lib::effect_enum::ANTI_GRAVITY}},
+				{Effects_Lib::effect_enum::TOXIC, {Effects_Lib::effect_enum::TOXIC, Effects_Lib::effect_enum::SMELLY}}
 			}
 		},
 		{
 			ingredient_type::BATTERY, {
-				{Effects::effect_enum::CYCLOPEAN, {Effects::effect_enum::CYCLOPEAN, Effects::effect_enum::GLOWING}},
-				{Effects::effect_enum::ELECTRIFYING, {Effects::effect_enum::ELECTRIFYING, Effects::effect_enum::EUPHORIC}},
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::ZOMBIFYING}},
-				{Effects::effect_enum::LAXATIVE, {Effects::effect_enum::LAXATIVE, Effects::effect_enum::CALORIE_DENSE}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::TROPIC_THUNDER}},
-				{Effects::effect_enum::SHRINKING, {Effects::effect_enum::SHRINKING, Effects::effect_enum::MUNCHIES}}
+				{Effects_Lib::effect_enum::CYCLOPEAN, {Effects_Lib::effect_enum::CYCLOPEAN, Effects_Lib::effect_enum::GLOWING}},
+				{Effects_Lib::effect_enum::ELECTRIFYING, {Effects_Lib::effect_enum::ELECTRIFYING, Effects_Lib::effect_enum::EUPHORIC}},
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::ZOMBIFYING}},
+				{Effects_Lib::effect_enum::LAXATIVE, {Effects_Lib::effect_enum::LAXATIVE, Effects_Lib::effect_enum::CALORIE_DENSE}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::TROPIC_THUNDER}},
+				{Effects_Lib::effect_enum::SHRINKING, {Effects_Lib::effect_enum::SHRINKING, Effects_Lib::effect_enum::MUNCHIES}}
 			}
 		},
 		{
 			ingredient_type::CHILI, {
-				{Effects::effect_enum::ANTI_GRAVITY, {Effects::effect_enum::ANTI_GRAVITY, Effects::effect_enum::TROPIC_THUNDER}},
-				{Effects::effect_enum::ATHLETIC, {Effects::effect_enum::ATHLETIC, Effects::effect_enum::EUPHORIC}},
-				{Effects::effect_enum::LAXATIVE, {Effects::effect_enum::LAXATIVE, Effects::effect_enum::LONG_FACED}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::TOXIC}},
-				{Effects::effect_enum::SHRINKING, {Effects::effect_enum::SHRINKING, Effects::effect_enum::REFRESHING}},
-				{Effects::effect_enum::SNEAKY, {Effects::effect_enum::SNEAKY, Effects::effect_enum::BRIGHT_EYED}}
+				{Effects_Lib::effect_enum::ANTI_GRAVITY, {Effects_Lib::effect_enum::ANTI_GRAVITY, Effects_Lib::effect_enum::TROPIC_THUNDER}},
+				{Effects_Lib::effect_enum::ATHLETIC, {Effects_Lib::effect_enum::ATHLETIC, Effects_Lib::effect_enum::EUPHORIC}},
+				{Effects_Lib::effect_enum::LAXATIVE, {Effects_Lib::effect_enum::LAXATIVE, Effects_Lib::effect_enum::LONG_FACED}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::TOXIC}},
+				{Effects_Lib::effect_enum::SHRINKING, {Effects_Lib::effect_enum::SHRINKING, Effects_Lib::effect_enum::REFRESHING}},
+				{Effects_Lib::effect_enum::SNEAKY, {Effects_Lib::effect_enum::SNEAKY, Effects_Lib::effect_enum::BRIGHT_EYED}}
 			}
 		},
 		{
 			ingredient_type::CUKE, {
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::LAXATIVE}},
-				{Effects::effect_enum::FOGGY, {Effects::effect_enum::FOGGY, Effects::effect_enum::CYCLOPEAN}},
-				{Effects::effect_enum::GINGERITIS, {Effects::effect_enum::GINGERITIS, Effects::effect_enum::THOUGHT_PROVOKING}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::ATHLETIC}},
-				{Effects::effect_enum::SLIPPERY, {Effects::effect_enum::SLIPPERY, Effects::effect_enum::MUNCHIES}},
-				{Effects::effect_enum::SNEAKY, {Effects::effect_enum::SNEAKY, Effects::effect_enum::PARANOIA}},
-				{Effects::effect_enum::TOXIC, {Effects::effect_enum::TOXIC, Effects::effect_enum::EUPHORIC}}
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::LAXATIVE}},
+				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::CYCLOPEAN}},
+				{Effects_Lib::effect_enum::GINGERITIS, {Effects_Lib::effect_enum::GINGERITIS, Effects_Lib::effect_enum::THOUGHT_PROVOKING}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::ATHLETIC}},
+				{Effects_Lib::effect_enum::SLIPPERY, {Effects_Lib::effect_enum::SLIPPERY, Effects_Lib::effect_enum::MUNCHIES}},
+				{Effects_Lib::effect_enum::SNEAKY, {Effects_Lib::effect_enum::SNEAKY, Effects_Lib::effect_enum::PARANOIA}},
+				{Effects_Lib::effect_enum::TOXIC, {Effects_Lib::effect_enum::TOXIC, Effects_Lib::effect_enum::EUPHORIC}}
 			}
 		},
 		{
 			ingredient_type::DONUT, {
-				{Effects::effect_enum::ANTI_GRAVITY, {Effects::effect_enum::ANTI_GRAVITY, Effects::effect_enum::SLIPPERY}},
-				{Effects::effect_enum::BALDING, {Effects::effect_enum::BALDING, Effects::effect_enum::SNEAKY}},
-				{Effects::effect_enum::CALORIE_DENSE, {Effects::effect_enum::CALORIE_DENSE, Effects::effect_enum::EXPLOSIVE}},
-				{Effects::effect_enum::FOCUSED, {Effects::effect_enum::FOCUSED, Effects::effect_enum::EUPHORIC}},
-				{Effects::effect_enum::JENNERISING, {Effects::effect_enum::JENNERISING, Effects::effect_enum::GINGERITIS}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::CALMING}},
-				{Effects::effect_enum::SHRINKING, {Effects::effect_enum::SHRINKING, Effects::effect_enum::ENERGIZING}}
+				{Effects_Lib::effect_enum::ANTI_GRAVITY, {Effects_Lib::effect_enum::ANTI_GRAVITY, Effects_Lib::effect_enum::SLIPPERY}},
+				{Effects_Lib::effect_enum::BALDING, {Effects_Lib::effect_enum::BALDING, Effects_Lib::effect_enum::SNEAKY}},
+				{Effects_Lib::effect_enum::CALORIE_DENSE, {Effects_Lib::effect_enum::CALORIE_DENSE, Effects_Lib::effect_enum::EXPLOSIVE}},
+				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::EUPHORIC}},
+				{Effects_Lib::effect_enum::JENNERISING, {Effects_Lib::effect_enum::JENNERISING, Effects_Lib::effect_enum::GINGERITIS}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::CALMING}},
+				{Effects_Lib::effect_enum::SHRINKING, {Effects_Lib::effect_enum::SHRINKING, Effects_Lib::effect_enum::ENERGIZING}}
 			}
 		},
 		{
 			ingredient_type::ENERGY_DRINK, {
-				{Effects::effect_enum::DISORIENTING, {Effects::effect_enum::DISORIENTING, Effects::effect_enum::ELECTRIFYING}},
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::ENERGIZING}},
-				{Effects::effect_enum::FOCUSED, {Effects::effect_enum::FOCUSED, Effects::effect_enum::SHRINKING}},
-				{Effects::effect_enum::FOGGY, {Effects::effect_enum::FOGGY, Effects::effect_enum::SHRINKING}},
-				{Effects::effect_enum::GLOWING, {Effects::effect_enum::GLOWING, Effects::effect_enum::DISORIENTING}},
-				{Effects::effect_enum::SCHIZOPHRENIA, {Effects::effect_enum::SCHIZOPHRENIA, Effects::effect_enum::BALDING}},
-				{Effects::effect_enum::SEDATING, {Effects::effect_enum::SEDATING, Effects::effect_enum::MUNCHIES}},
-				{Effects::effect_enum::SPICY, {Effects::effect_enum::SPICY, Effects::effect_enum::EUPHORIC}},
-				{Effects::effect_enum::TROPIC_THUNDER, {Effects::effect_enum::TROPIC_THUNDER, Effects::effect_enum::SNEAKY}}
+				{Effects_Lib::effect_enum::DISORIENTING, {Effects_Lib::effect_enum::DISORIENTING, Effects_Lib::effect_enum::ELECTRIFYING}},
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::ENERGIZING}},
+				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::SHRINKING}},
+				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::SHRINKING}},
+				{Effects_Lib::effect_enum::GLOWING, {Effects_Lib::effect_enum::GLOWING, Effects_Lib::effect_enum::DISORIENTING}},
+				{Effects_Lib::effect_enum::SCHIZOPHRENIA, {Effects_Lib::effect_enum::SCHIZOPHRENIA, Effects_Lib::effect_enum::BALDING}},
+				{Effects_Lib::effect_enum::SEDATING, {Effects_Lib::effect_enum::SEDATING, Effects_Lib::effect_enum::MUNCHIES}},
+				{Effects_Lib::effect_enum::SPICY, {Effects_Lib::effect_enum::SPICY, Effects_Lib::effect_enum::EUPHORIC}},
+				{Effects_Lib::effect_enum::TROPIC_THUNDER, {Effects_Lib::effect_enum::TROPIC_THUNDER, Effects_Lib::effect_enum::SNEAKY}}
 			}
 		},
 		{
 			ingredient_type::FLU_MEDICINE, {
-				{Effects::effect_enum::ATHLETIC, {Effects::effect_enum::ATHLETIC, Effects::effect_enum::MUNCHIES}},
-				{Effects::effect_enum::CALMING, {Effects::effect_enum::CALMING, Effects::effect_enum::BRIGHT_EYED}},
-				{Effects::effect_enum::CYCLOPEAN, {Effects::effect_enum::CYCLOPEAN, Effects::effect_enum::FOGGY}},
-				{Effects::effect_enum::ELECTRIFYING, {Effects::effect_enum::ELECTRIFYING, Effects::effect_enum::REFRESHING}},
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::TOXIC}},
-				{Effects::effect_enum::FOCUSED, {Effects::effect_enum::FOCUSED, Effects::effect_enum::CALMING}},
-				{Effects::effect_enum::LAXATIVE, {Effects::effect_enum::LAXATIVE, Effects::effect_enum::EUPHORIC}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::SLIPPERY}},
-				{Effects::effect_enum::SHRINKING, {Effects::effect_enum::SHRINKING, Effects::effect_enum::PARANOIA}},
-				{Effects::effect_enum::THOUGHT_PROVOKING, {Effects::effect_enum::THOUGHT_PROVOKING, Effects::effect_enum::GINGERITIS}}
+				{Effects_Lib::effect_enum::ATHLETIC, {Effects_Lib::effect_enum::ATHLETIC, Effects_Lib::effect_enum::MUNCHIES}},
+				{Effects_Lib::effect_enum::CALMING, {Effects_Lib::effect_enum::CALMING, Effects_Lib::effect_enum::BRIGHT_EYED}},
+				{Effects_Lib::effect_enum::CYCLOPEAN, {Effects_Lib::effect_enum::CYCLOPEAN, Effects_Lib::effect_enum::FOGGY}},
+				{Effects_Lib::effect_enum::ELECTRIFYING, {Effects_Lib::effect_enum::ELECTRIFYING, Effects_Lib::effect_enum::REFRESHING}},
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::TOXIC}},
+				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::CALMING}},
+				{Effects_Lib::effect_enum::LAXATIVE, {Effects_Lib::effect_enum::LAXATIVE, Effects_Lib::effect_enum::EUPHORIC}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::SLIPPERY}},
+				{Effects_Lib::effect_enum::SHRINKING, {Effects_Lib::effect_enum::SHRINKING, Effects_Lib::effect_enum::PARANOIA}},
+				{Effects_Lib::effect_enum::THOUGHT_PROVOKING, {Effects_Lib::effect_enum::THOUGHT_PROVOKING, Effects_Lib::effect_enum::GINGERITIS}}
 			}
 		},
 		{
 			ingredient_type::GASOLINE, {
-				{Effects::effect_enum::DISORIENTING, {Effects::effect_enum::DISORIENTING, Effects::effect_enum::GLOWING}},
-				{Effects::effect_enum::ELECTRIFYING, {Effects::effect_enum::ELECTRIFYING, Effects::effect_enum::DISORIENTING}},
-				{Effects::effect_enum::ENERGIZING, {Effects::effect_enum::ENERGIZING, Effects::effect_enum::EUPHORIC}},
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::SPICY}},
-				{Effects::effect_enum::GINGERITIS, {Effects::effect_enum::GINGERITIS, Effects::effect_enum::SMELLY}},
-				{Effects::effect_enum::JENNERISING, {Effects::effect_enum::JENNERISING, Effects::effect_enum::SNEAKY}},
-				{Effects::effect_enum::LAXATIVE, {Effects::effect_enum::LAXATIVE, Effects::effect_enum::FOGGY}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::SEDATING}},
-				{Effects::effect_enum::PARANOIA, {Effects::effect_enum::PARANOIA, Effects::effect_enum::CALMING}},
-				{Effects::effect_enum::SHRINKING, {Effects::effect_enum::SHRINKING, Effects::effect_enum::FOCUSED}},
-				{Effects::effect_enum::SNEAKY, {Effects::effect_enum::SNEAKY, Effects::effect_enum::TROPIC_THUNDER}}
+				{Effects_Lib::effect_enum::DISORIENTING, {Effects_Lib::effect_enum::DISORIENTING, Effects_Lib::effect_enum::GLOWING}},
+				{Effects_Lib::effect_enum::ELECTRIFYING, {Effects_Lib::effect_enum::ELECTRIFYING, Effects_Lib::effect_enum::DISORIENTING}},
+				{Effects_Lib::effect_enum::ENERGIZING, {Effects_Lib::effect_enum::ENERGIZING, Effects_Lib::effect_enum::EUPHORIC}},
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::SPICY}},
+				{Effects_Lib::effect_enum::GINGERITIS, {Effects_Lib::effect_enum::GINGERITIS, Effects_Lib::effect_enum::SMELLY}},
+				{Effects_Lib::effect_enum::JENNERISING, {Effects_Lib::effect_enum::JENNERISING, Effects_Lib::effect_enum::SNEAKY}},
+				{Effects_Lib::effect_enum::LAXATIVE, {Effects_Lib::effect_enum::LAXATIVE, Effects_Lib::effect_enum::FOGGY}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::SEDATING}},
+				{Effects_Lib::effect_enum::PARANOIA, {Effects_Lib::effect_enum::PARANOIA, Effects_Lib::effect_enum::CALMING}},
+				{Effects_Lib::effect_enum::SHRINKING, {Effects_Lib::effect_enum::SHRINKING, Effects_Lib::effect_enum::FOCUSED}},
+				{Effects_Lib::effect_enum::SNEAKY, {Effects_Lib::effect_enum::SNEAKY, Effects_Lib::effect_enum::TROPIC_THUNDER}}
 			}
 		},
 		{
 			ingredient_type::HORSE_SEMEN, {
-				{Effects::effect_enum::ANTI_GRAVITY, {Effects::effect_enum::ANTI_GRAVITY, Effects::effect_enum::CALMING}},
-				{Effects::effect_enum::GINGERITIS, {Effects::effect_enum::GINGERITIS, Effects::effect_enum::REFRESHING}},
-				{Effects::effect_enum::SEIZURE_INDUCING, {Effects::effect_enum::SEIZURE_INDUCING, Effects::effect_enum::ENERGIZING}},
-				{Effects::effect_enum::THOUGHT_PROVOKING, {Effects::effect_enum::THOUGHT_PROVOKING, Effects::effect_enum::ELECTRIFYING}}
+				{Effects_Lib::effect_enum::ANTI_GRAVITY, {Effects_Lib::effect_enum::ANTI_GRAVITY, Effects_Lib::effect_enum::CALMING}},
+				{Effects_Lib::effect_enum::GINGERITIS, {Effects_Lib::effect_enum::GINGERITIS, Effects_Lib::effect_enum::REFRESHING}},
+				{Effects_Lib::effect_enum::SEIZURE_INDUCING, {Effects_Lib::effect_enum::SEIZURE_INDUCING, Effects_Lib::effect_enum::ENERGIZING}},
+				{Effects_Lib::effect_enum::THOUGHT_PROVOKING, {Effects_Lib::effect_enum::THOUGHT_PROVOKING, Effects_Lib::effect_enum::ELECTRIFYING}}
 			}
 		},
 		{
 			ingredient_type::IODINE, {
-				{Effects::effect_enum::CALMING, {Effects::effect_enum::CALMING, Effects::effect_enum::BALDING}},
-				{Effects::effect_enum::CALORIE_DENSE, {Effects::effect_enum::CALORIE_DENSE, Effects::effect_enum::GINGERITIS}},
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::SEIZURE_INDUCING}},
-				{Effects::effect_enum::FOGGY, {Effects::effect_enum::FOGGY, Effects::effect_enum::PARANOIA}},
-				{Effects::effect_enum::REFRESHING, {Effects::effect_enum::REFRESHING, Effects::effect_enum::THOUGHT_PROVOKING}},
-				{Effects::effect_enum::TOXIC, {Effects::effect_enum::TOXIC, Effects::effect_enum::SNEAKY}}
+				{Effects_Lib::effect_enum::CALMING, {Effects_Lib::effect_enum::CALMING, Effects_Lib::effect_enum::BALDING}},
+				{Effects_Lib::effect_enum::CALORIE_DENSE, {Effects_Lib::effect_enum::CALORIE_DENSE, Effects_Lib::effect_enum::GINGERITIS}},
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::SEIZURE_INDUCING}},
+				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::PARANOIA}},
+				{Effects_Lib::effect_enum::REFRESHING, {Effects_Lib::effect_enum::REFRESHING, Effects_Lib::effect_enum::THOUGHT_PROVOKING}},
+				{Effects_Lib::effect_enum::TOXIC, {Effects_Lib::effect_enum::TOXIC, Effects_Lib::effect_enum::SNEAKY}}
 			}
 		},
 		{
 			ingredient_type::MEGA_BEAN, {
-				{Effects::effect_enum::ATHLETIC, {Effects::effect_enum::ATHLETIC, Effects::effect_enum::LAXATIVE}},
-				{Effects::effect_enum::CALMING, {Effects::effect_enum::CALMING, Effects::effect_enum::GLOWING}},
-				{Effects::effect_enum::ENERGIZING, {Effects::effect_enum::ENERGIZING, Effects::effect_enum::CYCLOPEAN}},
-				{Effects::effect_enum::FOCUSED, {Effects::effect_enum::FOCUSED, Effects::effect_enum::DISORIENTING}},
-				{Effects::effect_enum::JENNERISING, {Effects::effect_enum::JENNERISING, Effects::effect_enum::PARANOIA}},
-				{Effects::effect_enum::SEIZURE_INDUCING, {Effects::effect_enum::SEIZURE_INDUCING, Effects::effect_enum::FOCUSED}},
-				{Effects::effect_enum::SHRINKING, {Effects::effect_enum::SHRINKING, Effects::effect_enum::ELECTRIFYING}},
-				{Effects::effect_enum::SLIPPERY, {Effects::effect_enum::SLIPPERY, Effects::effect_enum::TOXIC}},
-				{Effects::effect_enum::SNEAKY, {Effects::effect_enum::SNEAKY, Effects::effect_enum::CALMING}},
-				{Effects::effect_enum::THOUGHT_PROVOKING, {Effects::effect_enum::THOUGHT_PROVOKING, Effects::effect_enum::ENERGIZING}}
+				{Effects_Lib::effect_enum::ATHLETIC, {Effects_Lib::effect_enum::ATHLETIC, Effects_Lib::effect_enum::LAXATIVE}},
+				{Effects_Lib::effect_enum::CALMING, {Effects_Lib::effect_enum::CALMING, Effects_Lib::effect_enum::GLOWING}},
+				{Effects_Lib::effect_enum::ENERGIZING, {Effects_Lib::effect_enum::ENERGIZING, Effects_Lib::effect_enum::CYCLOPEAN}},
+				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::DISORIENTING}},
+				{Effects_Lib::effect_enum::JENNERISING, {Effects_Lib::effect_enum::JENNERISING, Effects_Lib::effect_enum::PARANOIA}},
+				{Effects_Lib::effect_enum::SEIZURE_INDUCING, {Effects_Lib::effect_enum::SEIZURE_INDUCING, Effects_Lib::effect_enum::FOCUSED}},
+				{Effects_Lib::effect_enum::SHRINKING, {Effects_Lib::effect_enum::SHRINKING, Effects_Lib::effect_enum::ELECTRIFYING}},
+				{Effects_Lib::effect_enum::SLIPPERY, {Effects_Lib::effect_enum::SLIPPERY, Effects_Lib::effect_enum::TOXIC}},
+				{Effects_Lib::effect_enum::SNEAKY, {Effects_Lib::effect_enum::SNEAKY, Effects_Lib::effect_enum::CALMING}},
+				{Effects_Lib::effect_enum::THOUGHT_PROVOKING, {Effects_Lib::effect_enum::THOUGHT_PROVOKING, Effects_Lib::effect_enum::ENERGIZING}}
 			}
 		},
 		{
 			ingredient_type::MOTOR_OIL, {
-				{Effects::effect_enum::ENERGIZING, {Effects::effect_enum::ENERGIZING, Effects::effect_enum::MUNCHIES}},
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::SEDATING}},
-				{Effects::effect_enum::FOGGY, {Effects::effect_enum::FOGGY, Effects::effect_enum::TOXIC}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::SCHIZOPHRENIA}},
-				{Effects::effect_enum::PARANOIA, {Effects::effect_enum::PARANOIA, Effects::effect_enum::ANTI_GRAVITY}}
+				{Effects_Lib::effect_enum::ENERGIZING, {Effects_Lib::effect_enum::ENERGIZING, Effects_Lib::effect_enum::MUNCHIES}},
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::SEDATING}},
+				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::TOXIC}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::SCHIZOPHRENIA}},
+				{Effects_Lib::effect_enum::PARANOIA, {Effects_Lib::effect_enum::PARANOIA, Effects_Lib::effect_enum::ANTI_GRAVITY}}
 			}
 		},
 		{
 			ingredient_type::MOUTH_WASH, {
-				{Effects::effect_enum::CALMING, {Effects::effect_enum::CALMING, Effects::effect_enum::ANTI_GRAVITY}},
-				{Effects::effect_enum::CALORIE_DENSE, {Effects::effect_enum::CALORIE_DENSE, Effects::effect_enum::SNEAKY}},
-				{Effects::effect_enum::EXPLOSIVE, {Effects::effect_enum::EXPLOSIVE, Effects::effect_enum::SEDATING}},
-				{Effects::effect_enum::FOCUSED, {Effects::effect_enum::FOCUSED, Effects::effect_enum::JENNERISING}}
+				{Effects_Lib::effect_enum::CALMING, {Effects_Lib::effect_enum::CALMING, Effects_Lib::effect_enum::ANTI_GRAVITY}},
+				{Effects_Lib::effect_enum::CALORIE_DENSE, {Effects_Lib::effect_enum::CALORIE_DENSE, Effects_Lib::effect_enum::SNEAKY}},
+				{Effects_Lib::effect_enum::EXPLOSIVE, {Effects_Lib::effect_enum::EXPLOSIVE, Effects_Lib::effect_enum::SEDATING}},
+				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::JENNERISING}}
 			}
 		},
 		{
 			ingredient_type::PARACETAMOL, {
-				{Effects::effect_enum::CALMING, {Effects::effect_enum::CALMING, Effects::effect_enum::SLIPPERY}},
-				{Effects::effect_enum::ELECTRIFYING, {Effects::effect_enum::ELECTRIFYING, Effects::effect_enum::ATHLETIC}},
-				{Effects::effect_enum::ENERGIZING, {Effects::effect_enum::ENERGIZING, Effects::effect_enum::PARANOIA}},
-				{Effects::effect_enum::FOCUSED, {Effects::effect_enum::FOCUSED, Effects::effect_enum::GINGERITIS}},
-				{Effects::effect_enum::FOGGY, {Effects::effect_enum::FOGGY, Effects::effect_enum::CALMING}},
-				{Effects::effect_enum::GLOWING, {Effects::effect_enum::GLOWING, Effects::effect_enum::TOXIC}},
-				{Effects::effect_enum::MUNCHIES, {Effects::effect_enum::MUNCHIES, Effects::effect_enum::ANTI_GRAVITY}},
-				{Effects::effect_enum::PARANOIA, {Effects::effect_enum::PARANOIA, Effects::effect_enum::BALDING}},
-				{Effects::effect_enum::SPICY, {Effects::effect_enum::SPICY, Effects::effect_enum::BRIGHT_EYED}},
-				{Effects::effect_enum::TOXIC, {Effects::effect_enum::TOXIC, Effects::effect_enum::TROPIC_THUNDER}}
+				{Effects_Lib::effect_enum::CALMING, {Effects_Lib::effect_enum::CALMING, Effects_Lib::effect_enum::SLIPPERY}},
+				{Effects_Lib::effect_enum::ELECTRIFYING, {Effects_Lib::effect_enum::ELECTRIFYING, Effects_Lib::effect_enum::ATHLETIC}},
+				{Effects_Lib::effect_enum::ENERGIZING, {Effects_Lib::effect_enum::ENERGIZING, Effects_Lib::effect_enum::PARANOIA}},
+				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::GINGERITIS}},
+				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::CALMING}},
+				{Effects_Lib::effect_enum::GLOWING, {Effects_Lib::effect_enum::GLOWING, Effects_Lib::effect_enum::TOXIC}},
+				{Effects_Lib::effect_enum::MUNCHIES, {Effects_Lib::effect_enum::MUNCHIES, Effects_Lib::effect_enum::ANTI_GRAVITY}},
+				{Effects_Lib::effect_enum::PARANOIA, {Effects_Lib::effect_enum::PARANOIA, Effects_Lib::effect_enum::BALDING}},
+				{Effects_Lib::effect_enum::SPICY, {Effects_Lib::effect_enum::SPICY, Effects_Lib::effect_enum::BRIGHT_EYED}},
+				{Effects_Lib::effect_enum::TOXIC, {Effects_Lib::effect_enum::TOXIC, Effects_Lib::effect_enum::TROPIC_THUNDER}}
 			}
 		},
 		{
 			ingredient_type::VIAGRA, {
-				{Effects::effect_enum::ATHLETIC, {Effects::effect_enum::ATHLETIC, Effects::effect_enum::SNEAKY}},
-				{Effects::effect_enum::DISORIENTING, {Effects::effect_enum::DISORIENTING, Effects::effect_enum::TOXIC}},
-				{Effects::effect_enum::EUPHORIC, {Effects::effect_enum::EUPHORIC, Effects::effect_enum::BRIGHT_EYED}},
-				{Effects::effect_enum::LAXATIVE, {Effects::effect_enum::LAXATIVE, Effects::effect_enum::CALMING}},
-				{Effects::effect_enum::SHRINKING, {Effects::effect_enum::SHRINKING, Effects::effect_enum::GINGERITIS}}
+				{Effects_Lib::effect_enum::ATHLETIC, {Effects_Lib::effect_enum::ATHLETIC, Effects_Lib::effect_enum::SNEAKY}},
+				{Effects_Lib::effect_enum::DISORIENTING, {Effects_Lib::effect_enum::DISORIENTING, Effects_Lib::effect_enum::TOXIC}},
+				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::BRIGHT_EYED}},
+				{Effects_Lib::effect_enum::LAXATIVE, {Effects_Lib::effect_enum::LAXATIVE, Effects_Lib::effect_enum::CALMING}},
+				{Effects_Lib::effect_enum::SHRINKING, {Effects_Lib::effect_enum::SHRINKING, Effects_Lib::effect_enum::GINGERITIS}}
 			}
 		}
 	};
 
 	std::uint64_t process_effects(ingredient_type ingr, const std::uint64_t effects_int64)
 	{
-		std::vector<Effects::effect_enum> new_effects_vector = Effects::to_effects_vector(effects_int64);
-		std::vector<std::pair<Effects::effect_enum, Effects::effect_enum>> staged_transforms = {};
+		std::vector<Effects_Lib::effect_enum> new_effects_vector = Effects_Lib::to_effects_vector(effects_int64);
+		std::vector<std::pair<Effects_Lib::effect_enum, Effects_Lib::effect_enum>> staged_transforms = {};
 
 		for (int i = new_effects_vector.size() - 1; i >= 0; i--)
 		{
@@ -268,7 +287,7 @@ namespace Ingredients_Lib
 			}
 		}
 
-		for (std::pair<Effects::effect_enum, Effects::effect_enum>& transform: staged_transforms)
+		for (std::pair<Effects_Lib::effect_enum, Effects_Lib::effect_enum>& transform: staged_transforms)
 		{
 			if (std::find(new_effects_vector.begin(), new_effects_vector.end(), transform.second) != new_effects_vector.end())
 			{
@@ -277,12 +296,13 @@ namespace Ingredients_Lib
 			new_effects_vector.push_back(transform.second);
 		}
 
-		if (new_effects_vector.size() < 8)
+		if (new_effects_vector.size() < 8 &&
+			std::find(new_effects_vector.begin(), new_effects_vector.end(), ingredient_base_effect.at(ingr)) == new_effects_vector.end())
 		{
 			new_effects_vector.push_back(ingredient_base_effect.at(ingr));
 		}
 
-		return Effects::to_effects_int64(new_effects_vector);
+		return Effects_Lib::to_effects_int64(new_effects_vector);
 	}
 }
 

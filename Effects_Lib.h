@@ -10,7 +10,7 @@
 #include <map>
 #include <string>
 
-namespace Effects
+namespace Effects_Lib
 {
 	enum class effect_enum
 	{
