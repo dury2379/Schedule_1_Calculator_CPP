@@ -1,8 +1,5 @@
 #include <iostream>
 
-#include "Products/OG_Kush.h"
-#include "Ingredients/Cuke.h"
-
 
 void wait_for_key();
 
