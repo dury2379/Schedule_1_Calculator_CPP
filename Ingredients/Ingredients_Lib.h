@@ -86,7 +86,7 @@ namespace Ingredients_Lib
 		{ingredient_type::MOUTH_WASH, "Mouth Wash"},
 		{ingredient_type::PARACETAMOL, "Paracetamol"},
 		{ingredient_type::VIAGRA, "Viagra"}
-	}
+	};
 	/*
 
 

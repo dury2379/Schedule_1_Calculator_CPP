@@ -8,9 +8,12 @@ file(GLOB INGREDIENTS
         "Effects_Lib.h")
 
 file(GLOB PRODUCTS
+        "Products/Create_starter_Products.cpp"
+        "Products/Create_Starter_Products.h"
         "Products/Products_Lib.h"
         "Products/Product.cpp"
-        "Products/Product.h")
+        "Products/Product.h"
+        "Products/Product.cpp")
 
 file(GLOB CONDITIONS
         "Conditions/Condition.cpp"

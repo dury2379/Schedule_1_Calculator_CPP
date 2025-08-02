@@ -25,7 +25,8 @@ Product::Product(Product* other_product)
 int Product::get_total_price() const
 {
 	double multiplier = 1.00;
-	for (const Effects_Lib::effect_enum& effect: effects)
+	std::vector<Effects_Lib::effect_enum> effects_vector = Effects_Lib::to_effects_vector(effects);
+	for (const Effects_Lib::effect_enum& effect: effects_vector)
 	{
 		multiplier += Effects_Lib::PRICE_MULTIPLIER.at(effect);
 	}

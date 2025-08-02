@@ -1,25 +1,27 @@
 #include <iostream>
+#include "Products/Products_Lib.h"
+#include "Products/Product.h"
+#include "Ingredients/Ingredients_Lib.h"
 
 
 void wait_for_key();
 
 int main()
 {
-	Product* weed = new OG_Kush();
+	Product* weed = Products_Lib::create_OG_Kush();
 	Product* new_product;
-	Cuke* c = new Cuke();
 
-	new_product = weed->mix(c);
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
 	delete weed;
 	weed = new_product;
 	// std::cout << "The product after mixing with Cuke is:\n"
 	// 		  << new_product->effects_to_string() << std::endl;
-	new_product = weed->mix(new Mega_Bean);
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::MEGA_BEAN);
 	delete weed;
 	weed = new_product;
 	// std::cout << "The product after mixing with Mega Bean is:\n"
 	// 		  << new_product->effects_to_string() << std::endl;
-	new_product = weed->mix(new Cuke);
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
 	delete weed;
 	// std::cout << "The product after mixing with Cuke is:\n"
 	//		  << new_product->effects_to_string() << std::endl;
