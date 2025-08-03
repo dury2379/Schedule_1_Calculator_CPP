@@ -24,8 +24,11 @@ int main()
 	// 		  << new_product->effects_to_string() << std::endl;
 	new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
 	delete weed;
+	// weed = new_product;
 	// std::cout << "The product after mixing with Cuke is:\n"
 	//		  << new_product->effects_to_string() << std::endl;
+	// new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
+	// delete weed;
 
 	std::cout << "Mixing Result:\n"
 			  << new_product->to_string() << std::endl;

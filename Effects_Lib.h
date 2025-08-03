@@ -50,7 +50,7 @@ namespace Effects_Lib
 		ZOMBIFYING
 	};
 
-	inline std::map<effect_enum, std::string> effects_to_string = {
+	inline static const std::map<effect_enum, std::string> effects_to_string = {
 		{effect_enum::ANTI_GRAVITY, "Anti-Gravity"},
 		{effect_enum::ATHLETIC, "Athletic"},
 		{effect_enum::BALDING, "Balding"},
@@ -74,6 +74,8 @@ namespace Effects_Lib
 		{effect_enum::PARANOIA, "Paranoia"},
 		{effect_enum::REFRESHING, "Refreshing"},
 		{effect_enum::SCHIZOPHRENIA, "Schizophrenia"},
+		{effect_enum::SEDATING, "Sedating"},
+		{effect_enum::SEIZURE_INDUCING, "Seizure-Inducing"},
 		{effect_enum::SHRINKING, "Shrinking"},
 		{effect_enum::SLIPPERY, "Slippery"},
 		{effect_enum::SMELLY, "Smelly"},
@@ -82,7 +84,8 @@ namespace Effects_Lib
 		{effect_enum::THOUGHT_PROVOKING, "Thought-Provoking"},
 		{effect_enum::TOXIC, "Toxic"},
 		{effect_enum::TROPIC_THUNDER, "Tropic-Thunder"},
-		{effect_enum::ZOMBIFYING, "Zombifying"}};
+		{effect_enum::ZOMBIFYING, "Zombifying"}
+	};
 
 	static const std::map<effect_enum, double> PRICE_MULTIPLIER = {
 		{effect_enum::SHRINKING, 0.60},

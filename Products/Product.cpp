@@ -123,7 +123,11 @@ std::string Product::effects_to_string(std::string& prefix) const
 
 	for (Effects_Lib::effect_enum& effect: effects_vector)
 	{
+		// std::cout << "Effect index: " << static_cast<int>(effect) << std::endl;
+		// std::cout << "'effects_to_string': "  << Effects_Lib::effects_to_string.at(static_cast<Effects_Lib::effect_enum>(24)) << std::endl;
 		result.append(Effects_Lib::effects_to_string.at(effect) + "\n" + prefix + "\t");
+		// result.append(std::to_string(static_cast<int>(effect)) + "\n" + prefix + "\t");
+
 	}
 
 	if (result.size() < prefix.size() + 2)

@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <map>
+#include <iostream>
 #include "../Effects_Lib.h"
 
 namespace Ingredients_Lib
@@ -29,6 +30,23 @@ namespace Ingredients_Lib
 		MOUTH_WASH,
 		PARACETAMOL,
 		VIAGRA
+	};
+
+	static const std::vector<ingredient_type> ingredients_vector = {
+		ingredient_type::ADDY,
+		ingredient_type::BANANA,
+		ingredient_type::BATTERY,
+		ingredient_type::CHILI,
+		ingredient_type::CUKE,
+		ingredient_type::DONUT,
+		ingredient_type::ENERGY_DRINK,
+		ingredient_type::FLU_MEDICINE,
+		ingredient_type::GASOLINE,
+		ingredient_type::HORSE_SEMEN,
+		ingredient_type::IODINE,
+		ingredient_type::MEGA_BEAN,
+		ingredient_type::MOTOR_OIL,
+		ingredient_type::PARACETAMOL
 	};
 
 	static const std::map<ingredient_type, Effects_Lib::effect_enum> ingredient_base_effect = {

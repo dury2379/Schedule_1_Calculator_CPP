@@ -8,23 +8,28 @@
 #include <vector>
 
 #include "Conditions/Contains.h"
-#include "Products/Products.h"
+#include "Effects_Lib.h"
 #include "Ingredients/Ingredients_Lib.h"
+#include "Products/Create_Starter_Products.h"
 
 
 void clean_tasks(std::vector<std::vector<Product*>>*);
 
 int main()
 {
-	Condition* test = new Contains({Effects::Thought_Provoking, Effects::Shrinking, Effects::Balding, Effects::Tropic_Thunder, Effects::Sedating});
+	Condition* test = new Contains({Effects_Lib::effect_enum::THOUGHT_PROVOKING,
+						Effects_Lib::effect_enum::SHRINKING,
+						Effects_Lib::effect_enum::BALDING,
+						Effects_Lib::effect_enum::TROPIC_THUNDER,
+						Effects_Lib::effect_enum::SEDATING});
 
-	std::set<std::set<std::string>> visited = {};
+	std::set<uint64_t> visited = {};
 	std::vector<std::vector<Product*>> tasks = {};
 	int current_layer = 0;
 
 	tasks.emplace_back();
 
-	tasks[0].emplace_back(new OG_Kush());
+	tasks[0].emplace_back(Create_Starter_Products::create_OG_Kush());
 	// tasks[0].emplace_back(new Methamphetamine());
 
 	while (!tasks[current_layer].empty() && !test->is_fulfilled())
@@ -33,15 +38,15 @@ int main()
 		long long i = tasks[current_layer].size() - 1;
 		while (i >= 0 && !test->is_fulfilled())
 		{
-			for (int j = 0; j < Ingredients_Vector::INDEXED_INGREDIENTS.size(); j++)
+			for (int j = 0; j < Ingredients_Lib::ingredients_vector.size(); j++)
 			{
-				Ingredient* ing = Ingredients_Vector::INDEXED_INGREDIENTS[j]();
+				Ingredients_Lib::ingredient_type ing = Ingredients_Lib::ingredients_vector[j];
 				Product* next_product = tasks[current_layer][i]->mix(ing);
-				if (!visited.contains(*next_product->get_effects_pointer()))
+				if (!visited.contains(next_product->get_effects()))
 				{
 					test->test_condition(next_product);
 					tasks[current_layer + 1].emplace_back(next_product);
-					visited.emplace(*next_product->get_effects_pointer());
+					visited.emplace(next_product->get_effects());
 				}
 				else
 				{
