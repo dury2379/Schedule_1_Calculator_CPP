@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Products/Products_Lib.h"
 #include "Products/Product.h"
+#include "Products/Create_Starter_Products.h"
 #include "Ingredients/Ingredients_Lib.h"
 
 
@@ -8,7 +9,7 @@ void wait_for_key();
 
 int main()
 {
-	Product* weed = Products_Lib::create_OG_Kush();
+	Product* weed = Create_Starter_Products::create_OG_Kush();
 	Product* new_product;
 
 	new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);

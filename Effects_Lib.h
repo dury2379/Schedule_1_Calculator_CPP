@@ -121,7 +121,7 @@ namespace Effects_Lib
 		{effect_enum::TOXIC, 0.00}
 	};
 
-	std::vector<effect_enum> to_effects_vector(std::uint64_t effects_long)
+	inline std::vector<effect_enum> to_effects_vector(std::uint64_t effects_long)
 	{
 		std::vector<effect_enum> result = {};
 		std::uint8_t effect_enum_val = 0;
@@ -140,7 +140,7 @@ namespace Effects_Lib
 		return result;
 	}
 
-	std::uint64_t to_effects_int64(std::vector<effect_enum>& effects_vector)
+	inline std::uint64_t to_effects_int64(std::vector<effect_enum>& effects_vector)
 	{
 		std::uint64_t result = 0;
 		std::sort(effects_vector.begin(), effects_vector.end());

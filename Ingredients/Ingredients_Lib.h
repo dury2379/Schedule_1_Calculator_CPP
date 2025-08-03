@@ -273,7 +273,7 @@ namespace Ingredients_Lib
 		}
 	};
 
-	std::uint64_t process_effects(ingredient_type ingr, const std::uint64_t effects_int64)
+	inline std::uint64_t process_effects(ingredient_type ingr, const std::uint64_t effects_int64)
 	{
 		std::vector<Effects_Lib::effect_enum> new_effects_vector = Effects_Lib::to_effects_vector(effects_int64);
 		std::vector<std::pair<Effects_Lib::effect_enum, Effects_Lib::effect_enum>> staged_transforms = {};
