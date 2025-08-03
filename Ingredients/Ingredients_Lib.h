@@ -180,7 +180,7 @@ namespace Ingredients_Lib
 				{Effects_Lib::effect_enum::DISORIENTING, {Effects_Lib::effect_enum::DISORIENTING, Effects_Lib::effect_enum::ELECTRIFYING}},
 				{Effects_Lib::effect_enum::EUPHORIC, {Effects_Lib::effect_enum::EUPHORIC, Effects_Lib::effect_enum::ENERGIZING}},
 				{Effects_Lib::effect_enum::FOCUSED, {Effects_Lib::effect_enum::FOCUSED, Effects_Lib::effect_enum::SHRINKING}},
-				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::SHRINKING}},
+				{Effects_Lib::effect_enum::FOGGY, {Effects_Lib::effect_enum::FOGGY, Effects_Lib::effect_enum::LAXATIVE}},
 				{Effects_Lib::effect_enum::GLOWING, {Effects_Lib::effect_enum::GLOWING, Effects_Lib::effect_enum::DISORIENTING}},
 				{Effects_Lib::effect_enum::SCHIZOPHRENIA, {Effects_Lib::effect_enum::SCHIZOPHRENIA, Effects_Lib::effect_enum::BALDING}},
 				{Effects_Lib::effect_enum::SEDATING, {Effects_Lib::effect_enum::SEDATING, Effects_Lib::effect_enum::MUNCHIES}},

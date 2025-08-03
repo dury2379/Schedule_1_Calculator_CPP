@@ -36,3 +36,4 @@ add_executable(Sets_Contains_Test sets_contain_test.cpp)
 
 add_executable(Max_Profit Max_Profit.cpp
         ${INGREDIENTS} ${PRODUCTS} ${CONDITIONS})
+add_executable(Mixing_Teset_2 Mixing_Test_2.cpp ${INGREDIENTS} ${PRODUCTS})
