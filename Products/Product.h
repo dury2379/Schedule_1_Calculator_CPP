@@ -9,41 +9,37 @@
 #include <string>
 #include <vector>
 
-#include "../Ingredients/Ingredients.h"
+#include "Products_Lib.h"
+#include "../Ingredients/Ingredients_Lib.h"
 
 
 
 class Product {
 private:
-	int Base_Price;
-	int Total_Price;
-	int Ingredients_Cost;
-	int Profit;
-	bool delete_effects_set = true;
-	std::set<std::string>* effects;
-	std::vector<Ingredient*>* Ingredients_Chain;
-	int calculate_ingredients_cost();
-	int calculate_total_price() const;
-	void increment_ingredient_chain_pointers(std::vector<Ingredient*>*) const;
-	void decrement_ingredient_chain_pointers() const;
+	Products_Lib::starter_product root_prod;
+	uint64_t effects;
+	std::vector<Ingredients_Lib::ingredient_type> Ingredients_Chain;
 	std::string effects_to_string(std::string&) const;
-	std::string ingredients_to_string(std::string&) const;
+	std::string ingredients_to_string(std::string&);
 public:
-	Product(int, std::set<std::string>*, std::vector<Ingredient*>*);
-	Product(Product*, bool=true);
-	Product* mix(Ingredient*);
+	Product(Products_Lib::starter_product, uint64_t, std::vector<Ingredients_Lib::ingredient_type>);
+	Product(Product*);
+	Product* mix(Ingredients_Lib::ingredient_type);
+	int get_ingredients_cost();
+	int get_total_price() const;
 	std::string to_string();
 	std::string to_string(std::string);
-	std::set<std::string>* get_effects_pointer();
+	uint64_t get_effects();
 	int get_ingredients_chain_depth();
-	int get_profit() const;
+	bool ingredients_chain_equals(const std::vector<Ingredients_Lib::ingredient_type>&) const;
+	int get_profit();
 	bool contains(const Product*) const;
-	bool contains(std::set<std::string>*) const;
-	void keep_effects_set();
+	bool contains(uint64_t) const;
+	bool contains(std::vector<Effects_Lib::effect_enum>&) const;
 	bool operator<(const Product&) const;
-	bool operator<(const std::set<std::string>*) const;
+	bool operator<(uint64_t) const;
 	bool operator==(const Product&) const;
-	bool operator==(const std::set<std::string>*) const;
+	bool operator==(uint64_t) const;
 	virtual ~Product();
 };
 

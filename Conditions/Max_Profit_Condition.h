@@ -10,9 +10,10 @@
 class Max_Profit_Condition: public Condition {
 private:
 	int max_depth;
-	std::vector<Product> max_profits = {};
+	std::map<int, Product> max_profits = {};
+	void fill_fulfillment_list();
 public:
-	Max_Profit_Condition(int depth): max_depth(depth) {};
+	explicit Max_Profit_Condition(int depth): max_depth(depth) {};
 	bool test_condition(Product*) override;
 };
 

@@ -9,9 +9,10 @@
 
 class Contains: public Condition {
 private:
-	std::set<std::string> target;
+	uint64_t target;
 public:
-	Contains(std::set<std::string>);
+	Contains(uint64_t);
+	Contains(std::vector<Effects_Lib::effect_enum>);
 	bool test_condition(Product*);
 };
 

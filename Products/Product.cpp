@@ -6,74 +6,71 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <utility>
 
-Product::Product(int Base_Price, std::set<std::string>* effects, std::vector<Ingredient*>* Ingredients_Chain)
+Product::Product(Products_Lib::starter_product starter_prod, uint64_t effects_int, std::vector<Ingredients_Lib::ingredient_type> ingr_chain)
 {
-	this->Base_Price = Base_Price;
-	this->effects = effects;
-	this->Ingredients_Chain = Ingredients_Chain;
-	this->Ingredients_Cost = calculate_ingredients_cost();
-	this->Total_Price = calculate_total_price();
-	this->Profit = Total_Price - Ingredients_Cost;
+	root_prod = starter_prod;
+	effects = effects_int;
+	Ingredients_Chain = std::move(ingr_chain);
 }
 
-Product::Product(Product* other_product, bool delete_effects)
+Product::Product(Product* other_product)
 {
-	this->Base_Price = other_product->Base_Price;
-	this->Ingredients_Cost = other_product->Ingredients_Cost;
-	this->Profit = other_product->Profit;
-	this->Total_Price = other_product->Total_Price;
-	this->delete_effects_set = delete_effects;
-	this->effects = new std::set<std::string>(*other_product->effects);
-	this->Ingredients_Chain = new std::vector<Ingredient*>(*other_product->Ingredients_Chain);
-	increment_ingredient_chain_pointers(Ingredients_Chain);
+	root_prod = other_product->root_prod;
+	effects = other_product->effects;
+	Ingredients_Chain = other_product->Ingredients_Chain;
 }
 
-int Product::calculate_total_price() const
+int Product::get_total_price() const
 {
 	double multiplier = 1.00;
-	for (const std::string& effect: *this->effects)
+	std::vector<Effects_Lib::effect_enum> effects_vector = Effects_Lib::to_effects_vector(effects);
+	for (const Effects_Lib::effect_enum& effect: effects_vector)
 	{
-		multiplier += Effects::PRICE_MULTIPLIER.at(effect);
+		multiplier += Effects_Lib::PRICE_MULTIPLIER.at(effect);
 	}
-	return std::round(Base_Price * multiplier);
+	return std::round(Products_Lib::starter_product_costs.at(root_prod) * multiplier);
 }
 
-int Product::calculate_ingredients_cost()
+int Product::get_ingredients_cost()
 {
 	int total = 0;
-	for (Ingredient* ingredient: *Ingredients_Chain)
+	for (Ingredients_Lib::ingredient_type& ingredient: Ingredients_Chain)
 	{
-		total += ingredient->get_cost();
+		total += Ingredients_Lib::ingredients_costs.at(ingredient);
 	}
 
 	return total;
 }
 
-Product* Product::mix(Ingredient* additive)
+Product* Product::mix(Ingredients_Lib::ingredient_type additive)
 {
-	std::set<std::string>* new_effects = additive->process_effects(this->effects);
+	uint64_t new_effects = Ingredients_Lib::process_effects(additive, this->effects);
 	// 'std::vector.emplace_back()' copies the element. So it is not possible to use it with the abstract classes.
-	std::vector<Ingredient*>* new_ingredient_chain = new std::vector(*this->Ingredients_Chain);
-	new_ingredient_chain->emplace_back(additive);
-	increment_ingredient_chain_pointers(new_ingredient_chain);
-	return new Product(this->Base_Price, new_effects, new_ingredient_chain);
-
+	std::vector<Ingredients_Lib::ingredient_type> new_ingredient_chain = this->Ingredients_Chain;
+	new_ingredient_chain.emplace_back(additive);
+	return new Product(root_prod, new_effects, new_ingredient_chain);
 }
 
-std::set<std::string>* Product::get_effects_pointer()
+uint64_t Product::get_effects()
 {
 	return this->effects;
 }
 
-int Product::get_ingredients_chain_depth()
+bool Product::ingredients_chain_equals(const std::vector<Ingredients_Lib::ingredient_type>& ingr_vector) const
 {
-	return Ingredients_Chain->size();
+	return Ingredients_Chain == ingr_vector;
 }
 
-int Product::get_profit() const
+int Product::get_ingredients_chain_depth()
 {
-	return Profit;
+	return Ingredients_Chain.size();
+}
+
+int Product::get_profit()
+{
+	return get_total_price() - get_ingredients_cost();
 }
 
 bool Product::contains(const Product* other_product) const
@@ -81,10 +78,25 @@ bool Product::contains(const Product* other_product) const
 	return contains(other_product->effects);
 }
 
-bool Product::contains(std::set<std::string>* other_effects) const
+bool Product::contains(uint64_t other_effects) const
 {
-	return std::includes(this->effects->begin(), this->effects->end(),
-							other_effects->begin(), other_effects->end());
+	std::vector<Effects_Lib::effect_enum> other_effects_vector = Effects_Lib::to_effects_vector(other_effects);
+	return contains(other_effects_vector);
+}
+
+bool Product::contains(std::vector<Effects_Lib::effect_enum>& other_effects) const
+{
+	std::vector<Effects_Lib::effect_enum> this_effects = Effects_Lib::to_effects_vector(effects);
+
+	for (Effects_Lib::effect_enum& effect: other_effects)
+	{
+		if (std::find(this_effects.begin(), this_effects.end(), effect) == this_effects.end())
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 std::string Product::to_string()
@@ -96,10 +108,11 @@ std::string Product::to_string()
 std::string Product::to_string(std::string prefix)
 {
 	std::ostringstream oss;
-	oss << prefix << "Base Price: " << Base_Price << "\n"
-	    << prefix << "Total Price: " << Total_Price << "\n"
-	    << prefix << "Ingredients Cost: " << Ingredients_Cost << "\n"
-	    << prefix << "Profit: " << Profit << "\n"
+	oss << prefix << "Starting Product: " << Products_Lib::starter_product_to_str.at(root_prod) << "\n"
+		<< prefix << "Base Price: " << Products_Lib::starter_product_costs.at(root_prod) << "\n"
+	    << prefix << "Total Price: " << get_total_price() << "\n"
+	    << prefix << "Ingredients Cost: " << get_ingredients_cost() << "\n"
+	    << prefix << "Profit: " << get_profit() << "\n"
 	    << prefix << "Effects:\n"
 		<< effects_to_string(prefix) << "\n"
 		<< prefix << "Ingredients chain:\n"
@@ -111,25 +124,30 @@ std::string Product::to_string(std::string prefix)
 std::string Product::effects_to_string(std::string& prefix) const
 {
 	std::string result = prefix + "\t";
+	std::vector<Effects_Lib::effect_enum> effects_vector = Effects_Lib::to_effects_vector(effects);
 
-	for (const std::string& effect: *this->effects)
+	for (Effects_Lib::effect_enum& effect: effects_vector)
 	{
-		result.append(effect + "\n" + prefix + "\t");
+		// std::cout << "Effect index: " << static_cast<int>(effect) << std::endl;
+		// std::cout << "'effects_to_string': "  << Effects_Lib::effects_to_string.at(static_cast<Effects_Lib::effect_enum>(24)) << std::endl;
+		result.append(Effects_Lib::effects_to_string.at(effect) + "\n" + prefix + "\t");
+		// result.append(std::to_string(static_cast<int>(effect)) + "\n" + prefix + "\t");
+
 	}
 
-	if (result.size() < 2)
+	if (result.size() < prefix.size() + 2)
 		return "";
 
 	return result.substr(0, result.size() - 2 - prefix.size());
 }
 
-std::string Product::ingredients_to_string(std::string& prefix) const
+std::string Product::ingredients_to_string(std::string& prefix)
 {
 	std::string result;
 
-	for (int i = 0; i < this->Ingredients_Chain->size(); i++)
+	for (int i = 0; i < this->Ingredients_Chain.size(); i++)
 	{
-		result += prefix +  "\t" + std::to_string(i+1) + ". " + this->Ingredients_Chain->at(i)->get_type() + "\n";
+		result += prefix +  "\t" + std::to_string(i+1) + ". " + Ingredients_Lib::ingredient_to_string.at(Ingredients_Chain[i]) + "\n";
 	}
 
 	if (result.size() < 2)
@@ -138,37 +156,14 @@ std::string Product::ingredients_to_string(std::string& prefix) const
 	return result.substr(0, result.size() - 1);
 }
 
-void Product::increment_ingredient_chain_pointers(std::vector<Ingredient*>* ingredients_vec) const
-{
-	for (Ingredient* ingr: *ingredients_vec)
-	{
-		ingr->increment_pointer_counter();
-	}
-}
-
-void Product::decrement_ingredient_chain_pointers() const
-{
-	for (Ingredient* ingr: *Ingredients_Chain)
-	{
-		ingr->decrement_pointer_counter();
-	}
-}
-
-void Product::keep_effects_set()
-{
-	delete_effects_set = false;
-}
-
-
-
 bool Product::operator<(const Product& other) const
 {
 	return *this < other.effects;
 }
 
-bool Product::operator<(const std::set<std::string>* effects) const
+bool Product::operator<(uint64_t effects) const
 {
-	return *this->effects < *effects;
+	return this->effects < effects;
 }
 
 bool Product::operator==(const Product& other_product) const
@@ -176,19 +171,9 @@ bool Product::operator==(const Product& other_product) const
 	return *this == other_product.effects;
 }
 
-bool Product::operator==(const std::set<std::string>* other_effects) const
+bool Product::operator==(uint64_t other_effects) const
 {
 	return this->effects == other_effects;
 }
 
-Product::~Product()
-{
-	decrement_ingredient_chain_pointers();
-	if (delete_effects_set)
-	{
-		delete effects;
-	}
-	delete Ingredients_Chain;
-}
-
-
+Product::~Product() = default;

@@ -1,3 +1,6 @@
+//
+// Created by den on 8/3/25.
+//
 #include <iostream>
 #include "Products/Products_Lib.h"
 #include "Products/Product.h"
@@ -12,36 +15,40 @@ int main()
 	Product* weed = Create_Starter_Products::create_OG_Kush();
 	Product* new_product;
 
-	new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::PARACETAMOL);
 	delete weed;
 	weed = new_product;
 	// std::cout << "The product after mixing with Cuke is:\n"
 	// 		  << new_product->effects_to_string() << std::endl;
-	new_product = weed->mix(Ingredients_Lib::ingredient_type::MEGA_BEAN);
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
 	delete weed;
 	weed = new_product;
 	// std::cout << "The product after mixing with Mega Bean is:\n"
 	// 		  << new_product->effects_to_string() << std::endl;
-	new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::MEGA_BEAN);
 	delete weed;
+	weed = new_product;
 	// weed = new_product;
 	// std::cout << "The product after mixing with Cuke is:\n"
 	//		  << new_product->effects_to_string() << std::endl;
 	// new_product = weed->mix(Ingredients_Lib::ingredient_type::CUKE);
 	// delete weed;
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::CHILI);
+	delete weed;
+	weed = new_product;
 
-	std::cout << "Mixing Result:\n"
+	std::cout << "Product after CHILI:\n"
 			  << new_product->to_string() << std::endl;
 
-	wait_for_key();
+	new_product = weed->mix(Ingredients_Lib::ingredient_type::ENERGY_DRINK);
+	delete weed;
+	// weed = new_product;
+
+
+	std::cout << "Product after ENERGY_DRINK:\n"
+			  << new_product->to_string() << std::endl;
 
 	delete new_product;
 
 	return 0;
-}
-
-void wait_for_key()
-{
-	std::string stub_str = "";
-	std::getline(std::cin, stub_str);
 }
