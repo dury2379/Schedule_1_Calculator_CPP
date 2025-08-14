@@ -31,6 +31,7 @@ public:
 	std::string to_string(std::string);
 	uint64_t get_effects();
 	int get_ingredients_chain_depth();
+	bool ingredients_chain_equals(const std::vector<Ingredients_Lib::ingredient_type>&) const;
 	int get_profit();
 	bool contains(const Product*) const;
 	bool contains(uint64_t) const;

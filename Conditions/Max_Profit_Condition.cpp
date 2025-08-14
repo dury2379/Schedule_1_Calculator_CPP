@@ -11,22 +11,30 @@ bool Max_Profit_Condition::test_condition(Product* prod)
 {
 	if (prod->get_ingredients_chain_depth() == max_depth)
 	{
+		if (!fulfilled)
+		{
+			fill_fulfillment_list();
+		}
 		fulfilled = true;
 		return true;
 	}
-	while (prod->get_ingredients_chain_depth() > fulfillment_list.size())
+	if (!max_profits.contains(static_cast<int>(prod->get_ingredients_chain_depth())))
 	{
-	 	fulfillment_list.emplace_back(Create_Starter_Products::create_OG_Kush());
+		max_profits.insert({prod->get_ingredients_chain_depth(), Product(prod)});
 	}
-	if (prod->get_ingredients_chain_depth() == fulfillment_list.size())
+	else if (prod->get_profit() > max_profits.at(prod->get_ingredients_chain_depth()).get_profit())
 	{
-		fulfillment_list.emplace_back(new Product(prod));
-	}
-	else if (prod->get_profit() > fulfillment_list[prod->get_ingredients_chain_depth()]->get_profit())
-	{
-		delete fulfillment_list[prod->get_ingredients_chain_depth()];
-		fulfillment_list[prod->get_ingredients_chain_depth()] = new Product(prod);
+		max_profits.at(prod->get_ingredients_chain_depth()) = Product(prod);
 	}
 
 	return false;
+}
+
+void Max_Profit_Condition::fill_fulfillment_list()
+{
+	std::map<int, Product>::iterator it;
+	for (it = max_profits.begin(); it != max_profits.end(); it++)
+	{
+		fulfillment_list.emplace_back(new Product(it->second));
+	}
 }

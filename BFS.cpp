@@ -17,11 +17,16 @@ void clean_tasks(std::vector<std::vector<Product*>>*);
 
 int main()
 {
-	Condition* test = new Contains({Effects_Lib::effect_enum::THOUGHT_PROVOKING,
-						Effects_Lib::effect_enum::SHRINKING,
-						Effects_Lib::effect_enum::BALDING,
-						Effects_Lib::effect_enum::TROPIC_THUNDER,
-						Effects_Lib::effect_enum::SEDATING});
+/*	Condition* test = new Contains({Effects_Lib::effect_enum::REFRESHING,
+						Effects_Lib::effect_enum::LONG_FACED,
+						Effects_Lib::effect_enum::ANTI_GRAVITY,
+						Effects_Lib::effect_enum::SNEAKY,
+						Effects_Lib::effect_enum::SLIPPERY}); //*/
+
+	Condition* test = new Contains({Effects_Lib::effect_enum::FOCUSED,
+						Effects_Lib::effect_enum::SPICY,
+						Effects_Lib::effect_enum::LONG_FACED
+	});//*/
 
 	std::set<uint64_t> visited = {};
 	std::vector<std::vector<Product*>> tasks = {};
@@ -29,7 +34,7 @@ int main()
 
 	tasks.emplace_back();
 
-	tasks[0].emplace_back(Create_Starter_Products::create_OG_Kush());
+	tasks[0].emplace_back(Create_Starter_Products::create_Cocaine());
 	// tasks[0].emplace_back(new Methamphetamine());
 
 	while (!tasks[current_layer].empty() && !test->is_fulfilled())

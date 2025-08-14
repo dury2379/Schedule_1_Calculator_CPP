@@ -58,6 +58,11 @@ uint64_t Product::get_effects()
 	return this->effects;
 }
 
+bool Product::ingredients_chain_equals(const std::vector<Ingredients_Lib::ingredient_type>& ingr_vector) const
+{
+	return Ingredients_Chain == ingr_vector;
+}
+
 int Product::get_ingredients_chain_depth()
 {
 	return Ingredients_Chain.size();

@@ -46,7 +46,8 @@ namespace Ingredients_Lib
 		ingredient_type::IODINE,
 		ingredient_type::MEGA_BEAN,
 		ingredient_type::MOTOR_OIL,
-		ingredient_type::PARACETAMOL
+		ingredient_type::PARACETAMOL,
+		ingredient_type::VIAGRA
 	};
 
 	static const std::map<ingredient_type, Effects_Lib::effect_enum> ingredient_base_effect = {
