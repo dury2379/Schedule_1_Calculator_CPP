@@ -12,6 +12,10 @@
 
 namespace Effects_Lib
 {
+	/*
+	 * Enumerate all effects, 1 indexed. It is 1 indexed because the effects list is stored as one concatenated
+	 * 64-bit integer. Deconcatenation uses 0 as end of 64-bit integer.
+	 */
 	enum class effect_enum
 	{
 		ANTI_GRAVITY = 1,
@@ -50,6 +54,9 @@ namespace Effects_Lib
 		ZOMBIFYING
 	};
 
+	/*
+	 * Maps effect enum to its string variant. This is used in the last step of the calculator, the print-out.
+	 */
 	inline static const std::map<effect_enum, std::string> effects_to_string = {
 		{effect_enum::ANTI_GRAVITY, "Anti-Gravity"},
 		{effect_enum::ATHLETIC, "Athletic"},
@@ -87,6 +94,9 @@ namespace Effects_Lib
 		{effect_enum::ZOMBIFYING, "Zombifying"}
 	};
 
+	/*
+	 * Maps effect enum to its price multiplier. Used for profit calculation.
+	 */
 	static const std::map<effect_enum, double> PRICE_MULTIPLIER = {
 		{effect_enum::SHRINKING, 0.60},
 		{effect_enum::ZOMBIFYING, 0.58},
@@ -124,6 +134,11 @@ namespace Effects_Lib
 		{effect_enum::TOXIC, 0.00}
 	};
 
+	/*
+	 * Parses concatenated 64-bit int into a list. The list is always sorted. Sorting is done because during compression
+	 * of a list back into a 64-bit int, if two elements are transposed, the int values will be different, complicating
+	 * comparison of two products. Sorting insures that two similar products will generate the same int.
+	 */
 	inline std::vector<effect_enum> to_effects_vector(std::uint64_t effects_long)
 	{
 		std::vector<effect_enum> result = {};
@@ -143,6 +158,10 @@ namespace Effects_Lib
 		return result;
 	}
 
+	/*
+	 * Compresses a list of effects into a 64-bit int. Before compression the list is sorted. This is done so that two
+	 * products that have the same effects in different orders generate the same 64-bit int.
+	 */
 	inline std::uint64_t to_effects_int64(std::vector<effect_enum>& effects_vector)
 	{
 		std::uint64_t result = 0;
