@@ -23,8 +23,8 @@ int main()
 						Effects_Lib::effect_enum::SNEAKY,
 						Effects_Lib::effect_enum::SLIPPERY}); //*/
 
-	Condition* test = new Contains({Effects_Lib::effect_enum::FOCUSED,
-						Effects_Lib::effect_enum::SPICY,
+	Condition* test = new Contains({Effects_Lib::effect_enum::SNEAKY,
+						Effects_Lib::effect_enum::SHRINKING,
 						Effects_Lib::effect_enum::LONG_FACED
 	});//*/
 
