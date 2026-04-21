@@ -46,16 +46,26 @@ public:
 	uint64_t get_effects();
 	// Length of ingredients chain.
 	int get_ingredients_chain_depth();
-	//
+	// Compares these products ingredients chain to another ingredient chain, in vector form.
 	bool ingredients_chain_equals(const std::vector<Ingredients_Lib::ingredient_type>&) const;
+	// Calculates profit (margin) for this product.
 	int get_profit();
+	// Compares this product to another product. Returns true if this product contains all effects of the other product.
 	bool contains(const Product*) const;
+	// Same as contains(const Product*) but it uses concatenated 64-bit int.
 	bool contains(uint64_t) const;
+	// Same as contains(const Product*), but it uses vector of effects.
 	bool contains(std::vector<Effects_Lib::effect_enum>&) const;
+	// Less than comparison of concatenated 64-bit ints of each product.
+	// This is a less than operation use by hash maps and hash sets.
 	bool operator<(const Product&) const;
+	// Same as operator<(const Product&), but uses concatenated 64-bit int.
 	bool operator<(uint64_t) const;
+	// Equals comparison of concatenated 64-bit ints of each product. Used for hash maps and hash sets.
 	bool operator==(const Product&) const;
+	// Same as operator==(const Product&), but takes in concatenated 64-bit int.
 	bool operator==(uint64_t) const;
+	// Destructor. Does memory deallocation.
 	virtual ~Product();
 };
 
